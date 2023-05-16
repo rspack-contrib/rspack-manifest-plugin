@@ -3,10 +3,10 @@ import { relative, resolve } from 'path';
 import { SyncHook } from 'tapable';
 import { Compiler, WebpackPluginInstance, Compilation } from 'webpack';
 // @ts-ignore
-import NormalModule from 'webpack/lib/NormalModule';
+// import NormalModule from 'webpack/lib/NormalModule';
 
 import { FileDescriptor } from './helpers';
-import { beforeRunHook, emitHook, getCompilerHooks, normalModuleLoaderHook } from './hooks';
+import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
 
 const emitCountMap: EmitCountMap = new Map();
 
@@ -83,18 +83,20 @@ class WebpackManifestPlugin implements WebpackPluginInstance {
       moduleAssets,
       options: this.options
     });
-    const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
+    // const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
     const hookOptions = {
       name: 'WebpackManifestPlugin',
       stage: this.options.assetHookStage
     };
-
-    compiler.hooks.compilation.tap(hookOptions, (compilation) => {
-      const hook = !NormalModule.getCompilationHooks
-        ? compilation.hooks.normalModuleLoader
-        : NormalModule.getCompilationHooks(compilation).loader;
-      hook.tap(hookOptions, normalModuleLoader);
-    });
+    /**
+     * du
+     */
+    // compiler.hooks.compilation.tap(hookOptions, (compilation) => {
+    //   const hook = !NormalModule.getCompilationHooks
+    //     ? compilation.hooks.normalModuleLoader
+    //     : NormalModule.getCompilationHooks(compilation).loader;
+    //   hook.tap(hookOptions, normalModuleLoader);
+    // });
 
     if (this.options.useLegacyEmit === true) {
       compiler.hooks.emit.tap(hookOptions, emit);
