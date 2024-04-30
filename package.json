@@ -1,12 +1,12 @@
 {
-  "name": "webpack-manifest-plugin",
+  "name": "rspack-manifest-plugin",
   "version": "5.0.0",
-  "description": "A Webpack Plugin for generating Asset Manifests",
+  "description": "A Rspack Plugin for generating Asset Manifests",
   "license": "MIT",
-  "repository": "shellscape/webpack-manifest-plugin",
+  "repository": "rspack-contrib/rspack-manifest-plugin",
   "author": "Dane Thurber <dane.thurber@gmail.com>",
-  "homepage": "https://github.com/shellscape/webpack-manifest-plugin",
-  "bugs": "https://github.com/shellscape/webpack-manifest-plugin/issues",
+  "homepage": "https://github.com/rspack-contrib/rspack-manifest-plugin",
+  "bugs": "https://github.com/rspack-contrib/rspack-manifest-plugin/issues",
   "main": "dist/index.js",
   "engines": {
     "node": ">=14"

@@ -14,15 +14,17 @@
 [![size][size]][size-url]
 [![libera manifesto](https://img.shields.io/badge/libera-manifesto-lightgrey.svg)](https://liberamanifesto.com)
 
-# webpack-manifest-plugin
+# rspack-manifest-plugin
 
-A Webpack plugin for generating an asset manifest.
+> Forked from [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin) with the same API.
+
+A Rspack plugin for generating an asset manifest.
 
 :heart: Please consider [Sponsoring my work](https://github.com/sponsors/shellscape)
 
 ## Requirements
 
-`webpack-manifest-plugin` is an [evergreen 🌲](./.github/FAQ.md#what-does-evergreen-mean) module.
+`rspack-manifest-plugin` is an [evergreen 🌲](./.github/FAQ.md#what-does-evergreen-mean) module.
 
 This module requires an [Active LTS](https://github.com/nodejs/Release) Node version (v12.0.0+) and Webpack v5.0.0.
 
@@ -41,17 +43,15 @@ $ npm install pnpm -g
 Using npm:
 
 ```console
-npm install webpack-nano webpack-manifest-plugin --save-dev
+npm install rspack-manifest-plugin --save-dev
 ```
-
-_Note: We recommend using [webpack-nano](https://github.com/shellscape/webpack-nano), a very tiny, very clean webpack CLI._
 
 ## Usage
 
-Create a `webpack.config.js` file:
+Create a `rspack.config.js` file:
 
 ```js
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('rspack-manifest-plugin');
 const options = { ... };
 
 module.exports = {
@@ -64,11 +64,7 @@ module.exports = {
 };
 ```
 
-And run `webpack`:
-
-```console
-$ npx wp
-```
+And run `Rspack`.
 
 With the default options, the example above will create a `manifest.json` file in the output directory for the build. The manifest file will contain a map of source filenames to the corresponding build output file. e.g.
 
@@ -242,7 +238,7 @@ Returns: `{ afterEmit: SyncWaterfallHook, beforeEmit: SyncWaterfallHook }`
 #### Usage
 
 ```js
-const { getCompilerHooks } = require('webpack-manifest-plugin');
+const { getCompilerHooks } = require('rspack-manifest-plugin');
 
 class BatmanPlugin {
   apply(compiler) {
