@@ -16,11 +16,22 @@
 
 # rspack-manifest-plugin
 
-> Forked from [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin) with the same API.
-
 A Rspack plugin for generating an asset manifest.
 
-:heart: Please consider [Sponsoring my work](https://github.com/sponsors/shellscape)
+:heart: Please consider [Sponsoring shellscape (author of webpack-manifest-plugin)](https://github.com/sponsors/shellscape)
+
+## Notice
+
+This plugin is forked from [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin).
+
+The function of this plugin is basically the same as [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin).
+
+Change list:
+
+- Rename package to `rspack-manifest-plugin`
+- Import type from `@rspack/core`
+- Add `@rspack/core` to peer dependencies and remove `webpack`
+
 
 ## Requirements
 

@@ -1,9 +1,9 @@
 import { relative, resolve } from 'path';
 
 import { SyncHook } from 'tapable';
-import type { Compiler, WebpackPluginInstance, Compilation } from 'webpack';
+import type { Compiler, RspackPluginInstance, Compilation } from '@rspack/core';
 import { FileDescriptor } from './helpers';
-import { beforeRunHook, emitHook, getCompilerHooks, normalModuleLoaderHook } from './hooks';
+import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
 
 const emitCountMap: EmitCountMap = new Map();
 
@@ -61,14 +61,14 @@ interface Webpack5Hooks {
   processAssets: SyncHook<Compilation, any>;
 }
 
-class WebpackManifestPlugin implements WebpackPluginInstance {
+class WebpackManifestPlugin implements RspackPluginInstance {
   private options: InternalOptions;
   constructor(opts: ManifestPluginOptions) {
     this.options = Object.assign({}, defaults, opts);
   }
 
   apply(compiler: Compiler) {
-    const { NormalModule } = compiler.webpack;
+    // const { NormalModule } = compiler.webpack;
     const moduleAssets = {};
     const manifestFileName = resolve(compiler.options.output?.path || './', this.options.fileName);
     const manifestAssetId = relative(compiler.options.output?.path || './', manifestFileName);
@@ -81,18 +81,19 @@ class WebpackManifestPlugin implements WebpackPluginInstance {
       moduleAssets,
       options: this.options
     });
-    const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
+    // const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
     const hookOptions = {
       name: 'WebpackManifestPlugin',
       stage: this.options.assetHookStage
     };
 
-    compiler.hooks.compilation.tap(hookOptions, (compilation) => {
-      const hook = !NormalModule.getCompilationHooks
-        ? compilation.hooks.normalModuleLoader
-        : NormalModule.getCompilationHooks(compilation).loader;
-      hook.tap(hookOptions, normalModuleLoader);
-    });
+    // TODO: Rspack does not supports `compilation.hooks.normalModuleLoader` yet
+    // compiler.hooks.compilation.tap(hookOptions, (compilation) => {
+    //   const hook = !NormalModule.getCompilationHooks
+    //     ? compilation.hooks.normalModuleLoader
+    //     : NormalModule.getCompilationHooks(compilation).loader;
+    //   hook.tap(hookOptions, normalModuleLoader);
+    // });
 
     if (this.options.useLegacyEmit === true) {
       compiler.hooks.emit.tap(hookOptions, emit);

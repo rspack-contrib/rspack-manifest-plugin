@@ -33,7 +33,12 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "webpack": "^5.75.0"
+    "@rspack/core": "0.x || 1.x"
+  },
+  "peerDependenciesMeta": {
+    "@rspack/core": {
+      "optional": true
+    }
   },
   "dependencies": {
     "tapable": "^2.0.0",
@@ -43,6 +48,7 @@
     "@ava/babel": "^1.0.1",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@rspack/core": "^0.6.3",
     "@svgr/webpack": "^5.4.0",
     "@types/node": "^16.4.3",
     "@types/webpack": "^5.28.0",
