@@ -2,6 +2,7 @@ import { relative, resolve } from 'path';
 
 import { SyncHook } from 'tapable';
 import type { Compiler, RspackPluginInstance, Compilation } from '@rspack/core';
+
 import { FileDescriptor } from './helpers';
 import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
 
@@ -111,3 +112,5 @@ class WebpackManifestPlugin implements RspackPluginInstance {
 }
 
 export { getCompilerHooks, WebpackManifestPlugin };
+
+export const RspackManifestPlugin = WebpackManifestPlugin;
