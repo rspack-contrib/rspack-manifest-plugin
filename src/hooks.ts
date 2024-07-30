@@ -3,9 +3,6 @@ import { basename, dirname, join } from 'path';
 
 import { SyncWaterfallHook } from 'tapable';
 import { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
-// Note: This was the old delcaration. It appears to be Webpack v3 compat.
-// const { RawSource } = (webpack as any).sources || require('webpack-sources');
-import { RawSource } from 'webpack-sources';
 
 import { EmitCountMap, InternalOptions } from './';
 
@@ -156,7 +153,10 @@ const emitHook = function emit(
   if (isLastEmit) {
     const output = options.serialize(manifest);
 
-    (compilation as unknown as EmitCompilation).emitAsset(manifestAssetId, new RawSource(output));
+    (compilation as unknown as EmitCompilation).emitAsset(
+      manifestAssetId,
+      new compiler.webpack.sources.RawSource(output)
+    );
 
     if (options.writeToFileEmit) {
       mkdirSync(dirname(manifestFileName), { recursive: true });

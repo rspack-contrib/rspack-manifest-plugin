@@ -2,8 +2,7 @@
 
 const webpack = require('webpack');
 
-// eslint-disable-next-line global-require
-const { RawSource } = webpack.sources || require('webpack-sources');
+const { RawSource } = webpack.sources;
 
 class MockCopyPlugin {
   apply(compiler) {
