@@ -32,6 +32,7 @@ Change list:
 - Import type from `@rspack/core`
 - Add `@rspack/core` to peer dependencies and remove `webpack`
 - Add `RspackManifestPlugin` export
+- Replace `tapable` dependency with `@rspack/lite-tapable`
 
 ## Requirements
 

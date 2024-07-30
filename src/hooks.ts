@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from 'fs';
 import { basename, dirname, join } from 'path';
 
-import { SyncWaterfallHook } from 'tapable';
+import { SyncWaterfallHook } from '@rspack/lite-tapable';
 import { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
 
 import { EmitCountMap, InternalOptions } from './';

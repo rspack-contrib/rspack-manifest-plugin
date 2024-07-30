@@ -41,7 +41,7 @@
     }
   },
   "dependencies": {
-    "tapable": "^2.0.0"
+    "@rspack/lite-tapable": "^1.0.0-beta.0"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
