@@ -41,13 +41,13 @@
     }
   },
   "dependencies": {
-    "@rspack/lite-tapable": "^1.0.0-beta.0"
+    "@rspack/lite-tapable": "^1.0.1"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
-    "@rspack/core": "^0.6.3",
+    "@rspack/core": "^1.0.14",
     "@svgr/webpack": "^5.4.0",
     "@types/node": "^16.4.3",
     "@types/webpack": "^5.28.0",
@@ -106,5 +106,6 @@
       "test/"
     ]
   },
-  "pre-commit": "lint-staged"
+  "pre-commit": "lint-staged",
+  "packageManager": "pnpm@9.12.3"
 }
