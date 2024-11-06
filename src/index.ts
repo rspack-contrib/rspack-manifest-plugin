@@ -15,7 +15,7 @@ export interface InternalOptions {
   assetHookStage: number;
   basePath: string;
   fileName: string;
-  filter: (file: FileDescriptor) => Boolean;
+  filter: (file: FileDescriptor) => boolean;
   generate: (
     seed: Record<any, any>,
     files: FileDescriptor[],
@@ -28,9 +28,9 @@ export interface InternalOptions {
   serialize: (manifest: Manifest) => string;
   sort: (fileA: FileDescriptor, fileB: FileDescriptor) => Number;
   transformExtensions: RegExp;
-  useEntryKeys: Boolean;
-  useLegacyEmit: Boolean;
-  writeToFileEmit: Boolean;
+  useEntryKeys: boolean;
+  useLegacyEmit: boolean;
+  writeToFileEmit: boolean;
 }
 
 export type ManifestPluginOptions = Partial<InternalOptions>;

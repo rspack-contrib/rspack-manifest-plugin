@@ -6,10 +6,10 @@ import { InternalOptions, Manifest } from './';
 
 export interface FileDescriptor {
   chunk?: Chunk;
-  isAsset: Boolean;
-  isChunk: Boolean;
-  isInitial: Boolean;
-  isModuleAsset: Boolean;
+  isAsset: boolean;
+  isChunk: boolean;
+  isInitial: boolean;
+  isModuleAsset: boolean;
   name: string;
   path: string;
 }
