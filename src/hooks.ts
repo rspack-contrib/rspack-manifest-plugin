@@ -77,7 +77,6 @@ const emitHook = function emit(
   const stats = compilation.getStats().toJson({
     all: false,
     assets: true,
-    // @ts-expect-error not supported by Rspack
     cachedAssets: true,
     // Note: Webpack v5 compat
     ids: true,
