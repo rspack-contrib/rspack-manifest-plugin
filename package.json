@@ -106,6 +106,6 @@
       "test/"
     ]
   },
-  "pre-commit": "lint-staged",
-  "packageManager": "pnpm@9.12.3"
+  "packageManager": "pnpm@9.12.3",
+  "pre-commit": "lint-staged"
 }
