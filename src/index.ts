@@ -8,6 +8,8 @@ import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
 
 const emitCountMap: EmitCountMap = new Map();
 
+export type { FileDescriptor };
+
 export type Manifest = Record<string, any>;
 
 export interface InternalOptions {
