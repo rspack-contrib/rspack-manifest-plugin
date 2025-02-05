@@ -6,7 +6,7 @@
 [size-url]: https://packagephobia.now.sh/result?p=webpack-manifest-plugin
 
 <div align="center">
-	<img width="256" src="https://raw.githubusercontent.com/shellscape/webpack-manifest-plugin/master/assets/manifest.svg?sanitize=true" alt="webpack-manfiest-plugin"><br/><br/>
+ <img width="256" src="https://raw.githubusercontent.com/shellscape/webpack-manifest-plugin/master/assets/manifest.svg?sanitize=true" alt="webpack-manfiest-plugin"><br/><br/>
 </div>
 
 [![tests][tests]][tests-url]
@@ -25,12 +25,13 @@ A Rspack plugin for generating an asset manifest.
 This plugin is forked from [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin).
 
 The function of this plugin is basically the same as [shellscape/webpack-manifest-plugin](https://github.com/shellscape/webpack-manifest-plugin).
+And this plugin can be used with both Rspack and Webpack 5.
 
 Change list:
 
 - Rename package to `rspack-manifest-plugin`
 - Import type from `@rspack/core`
-- Add `@rspack/core` to peer dependencies and remove `webpack`
+- Add `@rspack/core` to peer dependencies
 - Add `RspackManifestPlugin` export
 - Replace `tapable` dependency with `@rspack/lite-tapable`
 
@@ -47,7 +48,7 @@ This repository leverages [pnpm](https://pnpm.js.org/) for dependency management
 To begin, please install `pnpm`:
 
 ```console
-$ npm install pnpm -g
+npm install pnpm -g
 ```
 
 ## Install
@@ -67,8 +68,8 @@ const { RspackManifestPlugin } = require('rspack-manifest-plugin');
 const options = { ... };
 
 module.exports = {
-	// an example entry definition
-	entry: [ 'app.js'	],
+  // an example entry definition
+  entry: [ 'app.js' ],
   ...
   plugins: [
     new RspackManifestPlugin(options)

@@ -1,10 +1,10 @@
 import { relative, resolve } from 'path';
 
-import { SyncHook } from '@rspack/lite-tapable';
-import type { Compiler, RspackPluginInstance, Compilation } from '@rspack/core';
+import type { Compiler, RspackPluginInstance } from '@rspack/core';
+import type * as Webpack from 'webpack';
 
-import { FileDescriptor } from './helpers';
-import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
+import type { FileDescriptor } from './helpers';
+import { beforeRunHook, emitHook, getCompilerHooks, normalModuleLoaderHook } from './hooks';
 
 const emitCountMap: EmitCountMap = new Map();
 
@@ -60,18 +60,14 @@ const defaults = {
 
 export type EmitCountMap = Map<any, any>;
 
-interface Webpack5Hooks {
-  processAssets: SyncHook<Compilation, any>;
-}
-
 class WebpackManifestPlugin implements RspackPluginInstance {
   private options: InternalOptions;
   constructor(opts: ManifestPluginOptions) {
     this.options = Object.assign({}, defaults, opts);
   }
 
-  apply(compiler: Compiler) {
-    // const { NormalModule } = compiler.webpack;
+  apply(compiler: Compiler | Webpack.Compiler) {
+    const { NormalModule } = compiler.webpack;
     const moduleAssets = {};
     const manifestFileName = resolve(compiler.options.output?.path || './', this.options.fileName);
     const manifestAssetId = relative(compiler.options.output?.path || './', manifestFileName);
@@ -84,27 +80,30 @@ class WebpackManifestPlugin implements RspackPluginInstance {
       moduleAssets,
       options: this.options
     });
-    // const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
+    const normalModuleLoader = normalModuleLoaderHook.bind(this, { moduleAssets });
+
     const hookOptions = {
       name: 'WebpackManifestPlugin',
       stage: this.options.assetHookStage
     };
 
-    // TODO: Rspack does not supports `compilation.hooks.normalModuleLoader` yet
-    // compiler.hooks.compilation.tap(hookOptions, (compilation) => {
-    //   const hook = !NormalModule.getCompilationHooks
-    //     ? compilation.hooks.normalModuleLoader
-    //     : NormalModule.getCompilationHooks(compilation).loader;
-    //   hook.tap(hookOptions, normalModuleLoader);
-    // });
+    compiler.hooks.compilation.tap(hookOptions, (compilation) => {
+      if (NormalModule.getCompilationHooks) {
+        NormalModule.getCompilationHooks(compilation as any).loader.tap(
+          hookOptions,
+          normalModuleLoader
+        );
+      } else if ('normalModuleLoader' in compilation.hooks) {
+        // TODO: Rspack does not supports `compilation.hooks.normalModuleLoader` yet
+        compilation.hooks.normalModuleLoader.tap(hookOptions, normalModuleLoader);
+      }
+    });
 
     if (this.options.useLegacyEmit === true) {
       compiler.hooks.emit.tap(hookOptions, emit);
     } else {
       compiler.hooks.thisCompilation.tap(hookOptions, (compilation) => {
-        (compilation.hooks as unknown as Webpack5Hooks).processAssets.tap(hookOptions, () =>
-          emit(compilation)
-        );
+        compilation.hooks.processAssets.tap(hookOptions, () => emit(compilation));
       });
     }
 
