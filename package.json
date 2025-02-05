@@ -33,10 +33,14 @@
     "LICENSE"
   ],
   "peerDependencies": {
-    "@rspack/core": "0.x || 1.x"
+    "@rspack/core": "0.x || 1.x",
+    "webpack": "^5.75.0"
   },
   "peerDependenciesMeta": {
     "@rspack/core": {
+      "optional": true
+    },
+    "webpack": {
       "optional": true
     }
   },

@@ -2,9 +2,10 @@ import { mkdirSync, writeFileSync } from 'fs';
 import { basename, dirname, join } from 'path';
 
 import { SyncWaterfallHook } from '@rspack/lite-tapable';
-import { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
+import type { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
+import type * as Webpack from 'webpack';
 
-import { EmitCountMap, InternalOptions } from './';
+import type { EmitCountMap, InternalOptions } from './';
 
 import {
   CompilationAsset,
@@ -21,7 +22,7 @@ interface BeforeRunHookArgs {
 }
 
 interface EmitHookArgs {
-  compiler: Compiler;
+  compiler: Compiler | Webpack.Compiler;
   emitCountMap: EmitCountMap;
   manifestAssetId: string;
   manifestFileName: string;
@@ -35,7 +36,7 @@ interface EmitCompilation {
 
 const compilerHookMap = new WeakMap();
 
-const getCompilerHooks = (compiler: Compiler) => {
+const getCompilerHooks = (compiler: Compiler | Webpack.Compiler) => {
   let hooks = compilerHookMap.get(compiler);
   if (typeof hooks === 'undefined') {
     hooks = {
@@ -49,7 +50,7 @@ const getCompilerHooks = (compiler: Compiler) => {
 
 const beforeRunHook = (
   { emitCountMap, manifestFileName }: BeforeRunHookArgs,
-  _: Compiler,
+  _: Compiler | Webpack.Compiler,
   callback: Function
 ) => {
   const emitCount = emitCountMap.get(manifestFileName) || 0;
@@ -70,7 +71,7 @@ const emitHook = function emit(
     moduleAssets,
     options
   }: EmitHookArgs,
-  compilation: Compilation
+  compilation: Compilation | Webpack.Compilation
 ) {
   const emitCount = emitCountMap.get(manifestFileName) - 1;
   // Disable everything we don't use, add asset info, show cached assets
@@ -89,9 +90,9 @@ const emitHook = function emit(
   emitCountMap.set(manifestFileName, emitCount);
 
   const auxiliaryFiles: Record<any, any> = {};
-  let files = Array.from(compilation.chunks).reduce<FileDescriptor[]>(
-    (prev: FileDescriptor[], chunk: any) => reduceChunk(prev, chunk, options, auxiliaryFiles),
-    [] as FileDescriptor[]
+  let files = [...compilation.chunks].reduce<FileDescriptor[]>(
+    (prev, chunk: any) => reduceChunk(prev, chunk, options, auxiliaryFiles),
+    []
   );
 
   // module assets don't show up in assetsByChunkName, we're getting them this way
@@ -166,9 +167,9 @@ const emitHook = function emit(
   getCompilerHooks(compiler).afterEmit.call(manifest);
 };
 
-interface LegacyModule extends Module {
+type LegacyModule = (Module | Webpack.Module) & {
   userRequest?: any;
-}
+};
 
 const normalModuleLoaderHook = (
   { moduleAssets }: { moduleAssets: Record<any, any> },

@@ -1,11 +1,12 @@
 import { dirname, join, basename } from 'path';
 
-import { AssetInfo, Chunk, Asset, Compilation } from '@rspack/core';
+import type { AssetInfo, Chunk, Asset, Compilation } from '@rspack/core';
+import type * as Webpack from 'webpack';
 
 import { InternalOptions, Manifest } from './';
 
 export interface FileDescriptor {
-  chunk?: Chunk;
+  chunk?: Chunk | Webpack.Chunk;
   isAsset: boolean;
   isChunk: boolean;
   isInitial: boolean;
@@ -23,13 +24,13 @@ export interface CompilationAsset extends Asset {
 }
 
 const generateManifest = (
-  compilation: Compilation,
+  compilation: Compilation | Webpack.Compilation,
   files: FileDescriptor[],
   { generate, seed = {} }: InternalOptions
 ) => {
   let result: Manifest;
   if (generate) {
-    const entrypointsArray = Array.from(compilation.entrypoints.entries());
+    const entrypointsArray = [...compilation.entrypoints.entries()];
     const entrypoints = entrypointsArray.reduce(
       (e, [name, entrypoint]) => Object.assign(e, { [name]: entrypoint.getFiles() }),
       {} as Record<string, any>
