@@ -21,7 +21,8 @@ export interface InternalOptions {
   generate: (
     seed: Record<any, any>,
     files: FileDescriptor[],
-    entries: Record<string, string[]>
+    entries: Record<string, string[]>,
+    context: { compilation: Compilation }
   ) => Manifest;
   map: (file: FileDescriptor) => FileDescriptor;
   publicPath: string;

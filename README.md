@@ -124,7 +124,7 @@ Allows filtering the files which make up the manifest. The passed function shoul
 Type: `Function`<br>
 Default: `undefined`
 
-A custom `Function` to create the manifest. The passed function should match the signature of `(seed: Object, files: FileDescriptor[], entries: string[]) => Object` and can return anything as long as it's serialisable by `JSON.stringify`.
+A custom `Function` to create the manifest. The passed function should match the signature of `(seed: Object, files: FileDescriptor[], entries: string[], context: { compilation: Compilation }) => Object` and can return anything as long as it's serialisable by `JSON.stringify`.
 
 ### `map`
 
