@@ -1,8 +1,6 @@
-import { dirname, join, basename } from 'path';
-
-import { AssetInfo, Chunk, Asset, Compilation } from '@rspack/core';
-
-import { InternalOptions, Manifest } from './';
+import { dirname, join, basename } from 'node:path';
+import type { AssetInfo, Chunk, Asset, Compilation } from '@rspack/core';
+import type { InternalOptions, Manifest } from './';
 
 export interface FileDescriptor {
   chunk?: Chunk;

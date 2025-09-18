@@ -1,10 +1,8 @@
-import { mkdirSync, writeFileSync } from 'fs';
-import { basename, dirname, join } from 'path';
-
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { basename, dirname, join } from 'node:path';
 import { SyncWaterfallHook } from '@rspack/lite-tapable';
-import { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
-
-import { EmitCountMap, InternalOptions } from './';
+import type { Compiler, Module, Compilation, LoaderContext } from '@rspack/core';
+import type { EmitCountMap, InternalOptions } from './';
 
 import {
   CompilationAsset,

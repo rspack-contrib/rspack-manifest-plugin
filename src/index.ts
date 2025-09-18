@@ -1,8 +1,6 @@
-import { relative, resolve } from 'path';
-
+import { relative, resolve } from 'node:path';
 import { SyncHook } from '@rspack/lite-tapable';
 import type { Compiler, RspackPluginInstance, Compilation } from '@rspack/core';
-
 import { FileDescriptor } from './helpers';
 import { beforeRunHook, emitHook, getCompilerHooks } from './hooks';
 
