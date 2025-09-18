@@ -1,6 +1,6 @@
 {
   "name": "rspack-manifest-plugin",
-  "version": "5.0.3",
+  "version": "5.1.0",
   "description": "A Rspack Plugin for generating Asset Manifests",
   "license": "MIT",
   "repository": "rspack-contrib/rspack-manifest-plugin",
