@@ -8,9 +8,6 @@
   "homepage": "https://github.com/rspack-contrib/rspack-manifest-plugin",
   "bugs": "https://github.com/rspack-contrib/rspack-manifest-plugin/issues",
   "main": "dist/index.js",
-  "engines": {
-    "node": ">=14"
-  },
   "scripts": {
     "build": "tsc --project tsconfig.json",
     "ci:coverage": "nyc pnpm ci:test && nyc report --reporter=text-lcov > coverage.lcov",
