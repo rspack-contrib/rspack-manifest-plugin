@@ -117,6 +117,13 @@ const emitHook = function emit(
     files = files.concat(auxiliaryFiles[auxiliaryFile]);
   });
 
+  const integrityMap: Record<string, string> = {};
+  stats.assets?.forEach((asset) => {
+    if (asset.integrity) {
+      integrityMap[asset.name] = asset.integrity;
+    }
+  });
+
   files = files.map((file: FileDescriptor) => {
     const normalizePath = (path: string): string => {
       if (!path.endsWith('/')) {
@@ -126,13 +133,17 @@ const emitHook = function emit(
       return path;
     };
 
-    const changes = {
+    const changes: Partial<FileDescriptor> & { name: string; path: string } = {
       // Append optional basepath onto all references. This allows output path to be reflected in the manifest.
       name: basePath ? normalizePath(basePath) + file.name : file.name,
       // Similar to basePath but only affects the value (e.g. how output.publicPath turns
       // require('foo/bar') into '/public/foo/bar', see https://github.com/webpack/docs/wiki/configuration#outputpublicpath
       path: publicPath ? normalizePath(publicPath) + file.path : file.path
     };
+
+    if (integrityMap[file.path]) {
+      changes.integrity = integrityMap[file.path];
+    }
 
     // Fixes #210
     changes.name = removeKeyHash ? changes.name.replace(removeKeyHash, '') : changes.name;
