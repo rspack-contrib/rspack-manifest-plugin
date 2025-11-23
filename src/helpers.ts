@@ -10,6 +10,11 @@ export interface FileDescriptor {
   isModuleAsset: boolean;
   name: string;
   path: string;
+  /**
+   * Subresource Integrity (SRI) hash.
+   * This field is available only when the `SubresourceIntegrityPlugin` is used.
+   */
+  integrity?: string;
 }
 
 export interface CompilationAssetInfo extends AssetInfo {
