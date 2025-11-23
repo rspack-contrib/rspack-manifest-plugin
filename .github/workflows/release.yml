@@ -36,7 +36,7 @@ jobs:
           corepack enable
 
       - name: Install Dependencies
-        run: pnpm install
+        run: pnpm install && pnpm build
 
       - name: Publish
         uses: JS-DevTools/npm-publish@v4
