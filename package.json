@@ -22,7 +22,8 @@
     "prepublishOnly": "pnpm lint && pnpm build",
     "pretest": "pnpm install && pnpm build",
     "security": "pnpm audit --audit-level=high --prod",
-    "test": "ava --timeout=2m"
+    "test": "ava --timeout=2m",
+    "bump": "npx bumpp"
   },
   "files": [
     "dist",
