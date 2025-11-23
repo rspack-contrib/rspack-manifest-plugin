@@ -1,20 +1,10 @@
-[tests]: https://img.shields.io/circleci/project/github/shellscape/webpack-manifest-plugin.svg
-[tests-url]: https://circleci.com/gh/shellscape/webpack-manifest-plugin
-[cover]: https://codecov.io/gh/shellscape/webpack-manifest-plugin/branch/master/graph/badge.svg
-[cover-url]: https://codecov.io/gh/shellscape/webpack-manifest-plugin
-[size]: https://packagephobia.now.sh/badge?p=webpack-manifest-plugin
-[size-url]: https://packagephobia.now.sh/result?p=webpack-manifest-plugin
-
-<div align="center">
-	<img width="256" src="https://raw.githubusercontent.com/shellscape/webpack-manifest-plugin/master/assets/manifest.svg?sanitize=true" alt="webpack-manfiest-plugin"><br/><br/>
-</div>
-
-[![tests][tests]][tests-url]
-[![cover][cover]][cover-url]
-[![size][size]][size-url]
-[![libera manifesto](https://img.shields.io/badge/libera-manifesto-lightgrey.svg)](https://liberamanifesto.com)
-
 # rspack-manifest-plugin
+
+<p>
+  <a href="https://www.npmjs.com/package/rspack-manifest-plugin?activeTab=readme"><img src="https://img.shields.io/npm/v/rspack-manifest-plugin?style=flat-square&colorA=564341&colorB=EDED91" alt="npm version" /></a>
+  <a href="https://npmcharts.com/compare/rspack-manifest-plugin?minimal=true"><img src="https://img.shields.io/npm/dm/rspack-manifest-plugin.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="downloads" /></a>
+  <a href="https://github.com/web-infra-dev/rspack/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&colorA=564341&colorB=EDED91" alt="license" /></a>
+</p>
 
 A Rspack plugin for generating an asset manifest.
 
